@@ -1,0 +1,28 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from pyvirtualdisplay import Display
+import unittest, time, re
+
+class WebdriverTest2(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+       #self.driver.implicitly_wait(5)
+        self.base_url = "http://www.google.com/"
+
+    def test_Google(self):
+        display = Display(visible=0, size=(800, 600))
+        display.start()
+        driver = self.driver
+        driver.get(self.base_url)
+        driver.find_element_by_id("gbqfq").clear()
+        driver.find_element_by_id("gbqfq").send_keys("Testing")
+
+    def tearDown(self):
+        self.driver.quit()
+        self.assertEqual([], self.verificationErrors)
+
+if __name__ == "__main__":
+    unittest.main()
+~                     
